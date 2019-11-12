@@ -237,10 +237,18 @@ prompt_aws() {
   esac
 }
 
+# DOCKER_HOST
+# - displays a 🐳 if connected to a remote docker instance
+prompt_docker_host() {
+	[[ -z "$DOCKER_HOST" ]] && return
+  prompt_segment white black "🐳"
+}
+
 ## Main prompt
 build_prompt() {
   RETVAL=$?
   prompt_status
+	prompt_docker_host
   prompt_virtualenv
   prompt_aws
   prompt_context
